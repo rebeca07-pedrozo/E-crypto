@@ -1,10 +1,10 @@
 # E-trading
 crypto-data-module/
 ├── scraper/
-│   └── crypto_scraper.py        #  scraping de criptomonedas 
+│   └── crypto_scraper.py        #  done 
 │
 ├── db/
-│   └── mongo.py                 #  MongoDB Atlas y guarda datos
+│   └── mongo.py                 #  done 
 │
 ├── analysis/
 │   └── queries.py               # Consultas OLAP con  Mongo
