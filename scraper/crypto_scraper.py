@@ -25,7 +25,7 @@ def get_crypto_data(limit=10):
             symbol = row.select_one("p.coin-item-symbol").text.strip()
 
             price_td = row.select("td")[3]
-            price_text = price_td.find("span").text.strip()  # Ejemplo: "$26,000.50"
+            price_text = price_td.find("span").text.strip()  
 
             price_num = float(price_text.replace("$", "").replace(",", ""))
 
