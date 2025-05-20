@@ -112,7 +112,7 @@ def main():
 
 
     st.markdown("---")
-    st.caption("Streamlit y MongoDB")
+    st.caption("(c) 2025 Rebeca Pedrozo Cueto")
 
 if __name__ == "__main__":
     main()
