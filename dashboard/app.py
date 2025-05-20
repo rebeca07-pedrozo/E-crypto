@@ -114,7 +114,7 @@ def main():
 
     col1, col2 = st.columns([2, 1])
     with col1:
-        st.markdown(f"### 📊 Gráfico de precios: **{opcion_seleccionada}**")
+        st.markdown(f"###  Gráfico de precios: **{opcion_seleccionada}**")
         st.line_chart(df_filtrado.set_index("scraped_at")["price"])
     with col2:
         latest = df_filtrado.iloc[-1]
@@ -135,3 +135,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+#/home/codespace/.python/current/bin/python3 -m pip install streamlit
+#python -m streamlit run /workspaces/E-trading/dashboard/app.py
