@@ -1,18 +1,7 @@
-# E-trading
-crypto-data-module/
-├── scraper/
-│   └── crypto_scraper.py        #  done 
-│
-├── db/
-│   └── mongo.py                 #  done 
-│
-├── analysis/
-│   └── queries.py               # Consultas OLAP con  Mongo
-│
-├── dashboard/
-│   └── app.py                   # Dashboard visual con Flask o Streamlit
-│
-├── .env                         # Variables de entorno 
-├── requirements.txt             # librerias necesarias
-├── README.md                    # Documentacion del modulo
-└── .gitignore                   # Para ignorar 
+pip install -r requirements.txt
+
+
+/home/codespace/.python/current/bin/python3 -m pip install streamlit
+python -m streamlit run /workspaces/E-trading/dashboard/app.py
+pip install pandas streamlit pymongo python-dotenv
+
