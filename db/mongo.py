@@ -20,3 +20,5 @@ def insert_crypto_data(data):
         print(f"{len(data)} criptomonedas insertadas en MongoDB.")
     else:
         print("No hay datos para insertar.")
+# Este código está bajo licencia MIT.
+# (c) 2025 Rebeca Pedrozo Cueto
