@@ -31,3 +31,5 @@ def root():
 def get_cryptos():
     cryptos = list(collection.find().sort("scraped_at", -1).limit(10))
     return json.loads(dumps(cryptos))
+# Este código está bajo licencia MIT.
+# (c) 2025 Rebeca Pedrozo Cueto
