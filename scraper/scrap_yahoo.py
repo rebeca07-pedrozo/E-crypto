@@ -46,3 +46,5 @@ if __name__ == "__main__":
     print(f"Se obtuvieron {len(datos_criptos)} criptomonedas.")
     insert_crypto_data(datos_criptos)
 
+# Este código está bajo licencia MIT.
+# (c) 2025 Rebeca Pedrozo Cueto
