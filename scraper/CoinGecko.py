@@ -51,3 +51,5 @@ if __name__ == "__main__":
         print(f"{len(cryptos)} criptomonedas insertadas correctamente desde la API de CoinGecko.")
     else:
         print("No se encontraron criptomonedas para insertar.")
+# Este código está bajo licencia MIT.
+# (c) 2025 Rebeca Pedrozo Cueto
