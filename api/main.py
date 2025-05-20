@@ -3,6 +3,10 @@ from fastapi.middleware.cors import CORSMiddleware
 from pymongo import MongoClient
 from bson.json_util import dumps
 import json
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 app = FastAPI()
 
@@ -14,7 +18,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-MONGO_URI = "mongodb+srv://rebecapc:22740876R@cluster0.v9ltmph.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+MONGO_URI = os.getenv("MONGO_URI")
 client = MongoClient(MONGO_URI)
 db = client["e_trading"]
 collection = db["cryptos"]
