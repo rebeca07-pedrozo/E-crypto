@@ -8,3 +8,6 @@ print(resumen_precios())
 
 print("Buscar Bitcoin:")
 print(buscar_por_nombre("Bitcoin"))
+# Este código está bajo licencia MIT.
+# (c) 2025 Rebeca Pedrozo Cueto
+
