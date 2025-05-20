@@ -1,30 +1,62 @@
-import sys
 import os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from dotenv import load_dotenv
+from pymongo import MongoClient
+import pandas as pd
 import streamlit as st
-from analysis.queries import listar_criptos, buscar_por_nombre, resumen_precios
 
-st.title("Dashboard de Criptomonedas")
+load_dotenv()
 
-st.header("Resumen de precios")
-resumen = resumen_precios()
-if resumen:
-    st.write(f"Precio máximo: {resumen['max_price']:.2f}")
-    st.write(f"Precio mínimo: {resumen['min_price']:.2f}")
-    st.write(f"Precio promedio: {resumen['avg_price']:.2f}")
-else:
-    st.write("No hay datos estadísticos disponibles.")
+MONGO_URI = os.getenv("MONGO_URI")
+DB_NAME = os.getenv("DB_NAME", "e_trading")
 
-st.header("Listado de criptomonedas")
-criptos = listar_criptos()
-for cripto in criptos:
-    st.write(f"**{cripto['name']}**: {cripto['price']}")
+client = MongoClient(MONGO_URI)
+db = client[DB_NAME]
 
-st.header("Buscar cripto por nombre")
-busqueda = st.text_input("Nombre de la criptomoneda:")
-if busqueda:
-    resultado = buscar_por_nombre(busqueda)
-    if resultado:
-        st.write(f"**{resultado['name']}**: {resultado['price']}")
+def get_all_cryptos():
+    collection = db["cryptos"]
+    data = list(collection.find())
+    if not data:
+        return pd.DataFrame()
+    
+    processed = []
+    for doc in data:
+        name = doc.get("name", "")
+        symbol = doc.get("symbol", "")
+        price_raw = doc.get("price", "0")
+        try:
+            price = float(price_raw.replace("$", "").replace(",", ""))
+        except:
+            price = 0.0
+        scraped_at = doc.get("scraped_at")
+        if scraped_at:
+            scraped_at = pd.to_datetime(scraped_at)
+        else:
+            scraped_at = None
+        
+        processed.append({
+            "name": name,
+            "symbol": symbol,
+            "price": price,
+            "scraped_at": scraped_at
+        })
+    
+    df = pd.DataFrame(processed)
+    return df
+
+def main():
+    st.title("Dashboard de Precios Criptomonedas")
+    
+    df = get_all_cryptos()
+    
+    if df.empty:
+        st.warning("No se encontraron datos en la base de datos.")
     else:
-        st.write("No se encontró la criptomoneda.")
+        st.write("Datos crudos de la colección:")
+        st.dataframe(df)
+        
+        st.write("Gráfico de precios a lo largo del tiempo:")
+        df_sorted = df.sort_values(by="scraped_at")
+        st.line_chart(df_sorted.set_index("scraped_at")["price"])
+
+if __name__ == "__main__":
+    main()
