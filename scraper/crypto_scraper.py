@@ -48,3 +48,5 @@ if __name__ == "__main__":
     for crypto in crypto_list:
         print(crypto)
     insert_crypto_data(crypto_list)
+# Este código está bajo licencia MIT.
+# (c) 2025 Rebeca Pedrozo Cueto
