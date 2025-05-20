@@ -9,6 +9,7 @@ load_dotenv()
 MONGO_URI = os.getenv("MONGO_URI")
 DB_NAME = os.getenv("DB_NAME", "e_trading")
 
+# Conexión a MongoDB
 client = MongoClient(MONGO_URI)
 db = client[DB_NAME]
 
@@ -50,13 +51,27 @@ def main():
     
     if df.empty:
         st.warning("No se encontraron datos en la base de datos.")
-    else:
-        st.write("Datos crudos de la colección:")
-        st.dataframe(df)
-        
-        st.write("Gráfico de precios a lo largo del tiempo:")
-        df_sorted = df.sort_values(by="scraped_at")
-        st.line_chart(df_sorted.set_index("scraped_at")["price"])
+        return
+    
+    st.write("Datos crudos de la colección:")
+    st.dataframe(df)
+    
+    # Selector para elegir cripto por nombre o símbolo
+    opciones = df["name"].astype(str) + " (" + df["symbol"].astype(str) + ")"
+    opcion_seleccionada = st.selectbox("Selecciona una criptomoneda:", opciones)
+    
+    # Extraer símbolo seleccionado
+    simbolo_seleccionado = opcion_seleccionada.split("(")[-1].replace(")","").strip()
+    
+    # Filtrar datos por símbolo
+    df_filtrado = df[df["symbol"] == simbolo_seleccionado].sort_values(by="scraped_at")
+    
+    if df_filtrado.empty:
+        st.warning(f"No hay datos para la criptomoneda {opcion_seleccionada}.")
+        return
+    
+    st.write(f"Gráfico de precios para {opcion_seleccionada}:")
+    st.line_chart(df_filtrado.set_index("scraped_at")["price"])
 
 if __name__ == "__main__":
     main()
