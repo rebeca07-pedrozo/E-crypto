@@ -70,9 +70,16 @@ def main():
     symbols = sorted(df["symbol"].unique())
     st.sidebar.header("Filtros OLAP")
 
-
     cryptos_seleccionadas = st.sidebar.multiselect("Criptomonedas:", options=symbols, default=symbols[:3])
-    rango_fechas = st.sidebar.date_input("Rango de fechas:", [df["scraped_at"].min().date(), df["scraped_at"].max().date()])
+    rango_fechas = st.sidebar.date_input(
+        "Rango de fechas:",
+        [df["scraped_at"].min().date(), df["scraped_at"].max().date()]
+    )
+
+    # Validación del rango de fechas
+    if len(rango_fechas) != 2 or rango_fechas[0] == rango_fechas[1] or rango_fechas[0] > rango_fechas[1]:
+        st.warning("Por favor selecciona un rango de fechas válido (mínimo dos días diferentes y en orden correcto).")
+        return
 
     df_filtrado = df[
         (df["symbol"].isin(cryptos_seleccionadas)) &
@@ -110,13 +117,11 @@ def main():
     for s, p, c in cambios:
         st.metric(f"{s} - Precio actual", f"${p:,.2f}", f"{c:.2f}%")
 
-
     st.markdown("---")
     st.caption("(c) 2025 Rebeca Pedrozo Cueto")
 
 if __name__ == "__main__":
     main()
-
 #/home/codespace/.python/current/bin/python3 -m pip install streamlit
 #python -m streamlit run /workspaces/E-trading/dashboard/app.py
 #pip install pandas streamlit pymongo python-dotenv
