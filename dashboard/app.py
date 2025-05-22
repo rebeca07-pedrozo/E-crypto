@@ -38,7 +38,7 @@ def get_crypto_data():
             date = pd.to_datetime(date["$date"])
         else:
             try:
-                date = pd.to_datetime(date)
+                date = pd.to_datetime(date) 
             except:
                 date = None
 
