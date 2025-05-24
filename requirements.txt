@@ -6,3 +6,6 @@ pandas
 streamlit
 requests
 beautifulsoup4
+tensorflow
+scikit-learn
+numpy
