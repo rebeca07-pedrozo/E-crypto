@@ -3,13 +3,13 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import LSTM, Dense
 from sklearn.preprocessing import MinMaxScaler
 
-def entrenar_modelo(data):
+def entrenar_modelo(data, window=10):
     scaler = MinMaxScaler()
     scaled_data = scaler.fit_transform(data.reshape(-1, 1))
 
     X, y = [], []
-    for i in range(60, len(scaled_data)):
-        X.append(scaled_data[i-60:i])
+    for i in range(window, len(scaled_data)):
+        X.append(scaled_data[i-window:i])
         y.append(scaled_data[i])
 
     X, y = np.array(X), np.array(y)
@@ -22,5 +22,5 @@ def entrenar_modelo(data):
 
     model.compile(optimizer='adam', loss='mean_squared_error')
     model.fit(X, y, epochs=10, batch_size=32, verbose=0)
-    
+
     return model, scaler
