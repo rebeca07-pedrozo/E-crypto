@@ -1,5 +1,5 @@
-# Taller de arquitectura y patrones 
-
+# E-cryto
+initializer steps
 1. pip install -r requirements.txt
 
 2. /home/codespace/.python/current/bin/python3 -m pip install streamlit
