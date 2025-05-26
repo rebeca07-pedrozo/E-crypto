@@ -2,7 +2,7 @@
 Este proyecto es una plataforma completa para analizar criptomonedas. Incluye una API con FastAPI que entrega datos actualizados desde MongoDB, scrapers para obtener datos en tiempo real desde CoinMarketCap y CoinGecko, y un dashboard con Streamlit que muestra análisis OLAP y predicciones de precios usando modelos LSTM. Ideal para monitorear y predecir tendencias en el mercado cripto.
 
 <p align="center">
-  <img src="pics/E-crypto.png" alt="E-CRYPTO"/>
+  <img src="pics/E-crypto.png" alt="E-CRYPTO" width="300"/>
 </p>
  
 
