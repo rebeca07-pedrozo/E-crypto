@@ -1,7 +1,10 @@
 # E-cryto
 Este proyecto es una plataforma completa para analizar criptomonedas. Incluye una API con FastAPI que entrega datos actualizados desde MongoDB, scrapers para obtener datos en tiempo real desde CoinMarketCap y CoinGecko, y un dashboard con Streamlit que muestra análisis OLAP y predicciones de precios usando modelos LSTM. Ideal para monitorear y predecir tendencias en el mercado cripto.
 
-![Image](https://github.com/user-attachments/assets/465e236e-3fc1-4c1c-bb2b-c7db0d61e514)
+<p align="center">
+  <img src="pics/E-crypto.png" alt="E-CRYPTO"/>
+</p>
+ 
 
 ## Archivos esenciales para ejecutar la app funcionalmente
 
