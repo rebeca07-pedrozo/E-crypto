@@ -92,6 +92,25 @@ def predecir_precio(model, scaler, data, window=10):
 
 def main():
     st.set_page_config(page_title="Crypto OLAP Dashboard + LSTM Prediction", layout="wide")
+
+    st.markdown(
+    """
+    <style>
+    .top-right-logo {
+        position: fixed;
+        top: 10px;
+        right: 20px;
+        width: 120px;
+        height: auto;
+        z-index: 1000;
+    }
+    </style>
+    <img src="https://raw.githubusercontent.com/rebeca07-pedrozo/E-crypto/main/pics/cryptoLogo.png" class="top-right-logo">
+    """,
+    unsafe_allow_html=True,
+)
+
+
     st.title("OLAP de Criptomonedas con Predicción LSTM")
 
     df = get_crypto_data()

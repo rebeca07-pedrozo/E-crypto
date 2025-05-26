@@ -9,5 +9,5 @@ tensorflow
 scikit-learn
 requests
 beautifulsoup4
-
+matplotlib
 
