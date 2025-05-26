@@ -1,4 +1,38 @@
 # E-cryto
+Este proyecto es una plataforma completa para analizar criptomonedas. Incluye una API con FastAPI que entrega datos actualizados desde MongoDB, scrapers para obtener datos en tiempo real desde CoinMarketCap y CoinGecko, y un dashboard con Streamlit que muestra análisis OLAP y predicciones de precios usando modelos LSTM. Ideal para monitorear y predecir tendencias en el mercado cripto.
+
+![Image](https://github.com/user-attachments/assets/465e236e-3fc1-4c1c-bb2b-c7db0d61e514)
+
+## Archivos esenciales para ejecutar la app funcionalmente
+
+| Archivo                      | Función principal                                             | ¿Necesario para producción? |
+|-----------------------------|--------------------------------------------------------------|-----------------------------|
+| `api/main.py`                   | API con FastAPI que expone datos de criptomonedas            | Sí                          |
+| `dashboard/app.pypy` | Dashboard visual con análisis OLAP y predicción LSTM          | Sí                          |
+
+---
+
+## Archivos para mantenimiento y actualización de datos
+
+| Archivo                         | Función principal                                               | Uso recomendado               |
+|--------------------------------|----------------------------------------------------------------|------------------------------|
+| `scraper/crypto_scraper.py` | Scraper para obtener datos actualizados de CoinMarketCap       | Actualizar base de datos MongoDB |
+| `scraper/CoinGeko.py`      | Scraper para obtener datos vía API de CoinGecko                | Alternativa para actualización |
+| `mongo.py`                     | Conexión e inserción en MongoDB                                | Utilizado por scrapers         |
+
+
+---
+
+## Notas importantes
+
+- Para que la app funcione correctamente, deben tener datos en la base MongoDB.  
+- La API (`main.py`) y el dashboard (`dashboard/app.py`) dependen de que Mongo tenga datos, pero no dependen directamente de los scrapers.  
+- Los scrapers solo se usan para **llenar o actualizar la base de datos**; pueden ejecutarse periódicamente si se desea.  
+
+---
+
+## Recomendación para el flujo de trabajo - Initializer steps
+
 initializer steps
 1. python -m venv env
 2. source env/bin/activate
