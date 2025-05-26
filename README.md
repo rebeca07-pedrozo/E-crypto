@@ -1,10 +1,9 @@
 # E-cryto
-Este proyecto es una plataforma completa para analizar criptomonedas. Incluye una API con FastAPI que entrega datos actualizados desde MongoDB, scrapers para obtener datos en tiempo real desde CoinMarketCap y CoinGecko, y un dashboard con Streamlit que muestra análisis OLAP y predicciones de precios usando modelos LSTM. Ideal para monitorear y predecir tendencias en el mercado cripto.
+Plataforma cripto con API (FastAPI), scrapers en tiempo real, análisis OLAP y predicción de precios con LSTM, visualizado en Streamlit.
 
 <p align="center">
-  <img src="pics/E-crypto.png" alt="E-CRYPTO" width="300"/>
+  <img src="https://github.com/rebeca07-pedrozo/E-crypto/blob/main/pics/E-Crypto.png?raw=true" alt="E-CRYPTO" width="300"/>
 </p>
- 
 
 ## Archivos esenciales para ejecutar la app funcionalmente
 
@@ -13,6 +12,14 @@ Este proyecto es una plataforma completa para analizar criptomonedas. Incluye un
 | `api/main.py`                   | API con FastAPI que expone datos de criptomonedas            | Sí                          |
 | `dashboard/app.pypy` | Dashboard visual con análisis OLAP y predicción LSTM          | Sí                          |
 
+---
+## Recomendación para el flujo de trabajo - Initializer steps
+
+initializer steps
+1. python -m venv env
+2. source env/bin/activate
+3. pip install -r requirements.txt
+4. python -m streamlit run /workspaces/E-trading/dashboard/app.py
 ---
 
 ## Archivos para mantenimiento y actualización de datos
@@ -34,12 +41,5 @@ Este proyecto es una plataforma completa para analizar criptomonedas. Incluye un
 
 ---
 
-## Recomendación para el flujo de trabajo - Initializer steps
-
-initializer steps
-1. python -m venv env
-2. source env/bin/activate
-3. pip install -r requirements.txt
-4. python -m streamlit run /workspaces/E-trading/dashboard/app.py
 
  
