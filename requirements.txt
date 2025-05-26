@@ -4,9 +4,10 @@ pymongo
 python-dotenv
 pandas
 streamlit
-requests
-beautifulsoup4
+numpy
 tensorflow
 scikit-learn
-numpy
+requests
+beautifulsoup4
+
 
