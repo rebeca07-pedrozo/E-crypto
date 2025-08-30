@@ -1,4 +1,4 @@
-# E-cryto
+# E-Crypto
 Plataforma cripto con API (FastAPI), scrapers en tiempo real, análisis OLAP y predicción de precios con LSTM, visualizado en Streamlit.
 
 <p align="center">
