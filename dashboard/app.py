@@ -15,6 +15,8 @@ DB_NAME = os.getenv("DB_NAME", "e_trading")
 
 client = MongoClient(MONGO_URI)
 db = client[DB_NAME]
+cryptos_col = db["cryptos"]
+
 
 BASE_PRICES = {
     "BTC": 28000.00,
