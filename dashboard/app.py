@@ -110,7 +110,7 @@ def main():
     <img src="https://raw.githubusercontent.com/rebeca07-pedrozo/E-crypto/main/pics/cryptoLogo.png" class="top-right-logo">
     """,
     unsafe_allow_html=True,
-)
+)  
 
 
     st.title("OLAP de Criptomonedas con Predicción LSTM")
