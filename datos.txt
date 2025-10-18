@@ -1,3 +1,126 @@
 MONGO_URI=mongodb+srv://rebecapc:Rb31415926535@cluster0.v9ltmph.mongodb.net/e_trading?retryWrites=true&w=majority&appName=Cluster0
 DB_NAME=e_trading
 - PONER LA IP en atlas
+
+
+PATRONES DE DISEÑO 
+------MVC (Model-View-Controller)
+
+Datos que vienen de MongoDB.
+
+Acá porque el sistema solo usa la función pero no sabe a ciencia cvierta como es que se conecta 
+
+from pymongo import MongoClient
+import pandas as pd
+
+def get_crypto_data():
+    client = MongoClient(MONGO_URI)
+    db = client['crypto_db']
+    collection = db['crypto_prices']
+    data = list(collection.find())
+    df = pd.DataFrame(data)
+    return df
+
+
+-------VIEW 
+
+
+st.title("📊 Dashboard E-Crypto")
+crypto = st.sidebar.selectbox("Selecciona una criptomoneda", df['name'].unique())
+st.line_chart(df[df['name'] == crypto]['price'])
+
+Solo muestra la info y recibe interacción del usuario, sin lógica de negocio pesada.
+
+-------- Controller (Lógica y flujo)
+
+
+def main():
+    df = get_crypto_data()
+    df = preprocess_data(df)
+    prediction = predict_prices(df)
+    display_dashboard(df, prediction)
+
+
+Orquesta todo: llama al modelo, ejecuta funciones y actualiza la vista.
+
+-------Patrón ETL (Extract, Transform, Load)
+
+
+def preprocess_data(df):
+    df['date'] = pd.to_datetime(df['timestamp'])
+    df = df.sort_values('date')
+    df = df.dropna()
+    return df
+
+
+Extract: get_crypto_data() obtiene datos.
+
+Transform: preprocess_data() limpia y organiza.
+
+Load: se carga el DataFrame a la vista Streamlit o se guarda en Mongo.
+
+---------ML Pipeline / Patrón Strategy
+
+Archivo: model.py o dentro del main.
+
+from sklearn.linear_model import LinearRegression
+
+def predict_prices(df):
+    model = LinearRegression()
+    X = df[['timestamp']]
+    y = df['price']
+    model.fit(X, y)
+    df['predicted'] = model.predict(X)
+    return df
+
+
+El modelo de predicción es intercambiable. Si mañana cambias LinearRegression por RandomForest, no tocas la vista ni la estructura general.
+
+--------Dashboard OLAP / Arquitectura de la Información
+
+
+col1, col2, col3 = st.columns(3)
+col1.metric("Precio Actual", f"${current_price}")
+col2.metric("Cambio 24h", f"{daily_change}%")
+col3.metric("Predicción", f"${predicted_price}")
+
+
+ARQUITECTURA DE LA INFORMACION ORGANIZACIÓN JERARQUIAS ETC 
+
+
+Organiza los datos en niveles de información (KPIs  Gráficas   Detalle).
+Primero lo mas importante y abajo se va mostrando el desglose 
+
+El orden es: 
+
+st.title("📊 Dashboard E-Crypto")      # Título principal
+st.subheader("Análisis de precios")     # Subnivel
+st.line_chart(df['price'])              # Contenido visual
+
+Tiene nevegacion facetada 
+crypto = st.sidebar.selectbox("Selecciona una criptomoneda", df['name'].unique())
+filtered = df[df['name'] == crypto]
+
+ESDecir que deja que pongas filtros lso que quieras sin tener que pasar cambiar de vista y se va actualizandoa utomaticamente 
+Para el diseño responsive que es una mezcla de python y css donde le decimos que se ajuste al ancho de la pantalla incluido el logo, cuando se hace eso el menu se oculta y sale como una opcion despelgable en un tipo de menu
+95
+
+def main():
+    st.set_page_config(page_title="Crypto OLAP Dashboard + LSTM Prediction", layout="wide")
+
+    st.markdown(
+    """
+    <style>
+    .top-right-logo {
+        position: fixed;
+        top: 10px;
+        right: 20px;
+        width: 120px;
+        height: auto;
+        z-index: 1000;
+    }
+    </style>
+    <img src="https://raw.githubusercontent.com/rebeca07-pedrozo/E-crypto/main/pics/cryptoLogo.png" class="top-right-logo">
+    """,
+    unsafe_allow_html=True,
+)
