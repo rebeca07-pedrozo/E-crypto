@@ -124,3 +124,12 @@ def main():
     """,
     unsafe_allow_html=True,
 )
+
+
+
+La red es una LSTM de RNN 
+se entrema luego de pasar los datos por un proceso de ETL donde se organizan los valores de las critpmomedas en una sola columna y en valores con no grandes formatos para que el modelo aprenda mas facilmente, entonces 
+se entrena por ventanas emergentes que son las que mirran desde que llegaron los datos el comportamiento conforme avanca el tiempo generalmente son de 60 dias pero esta vez se hizo de 13 dias porque lo hice en mayo o sea su entrenamiento es de 13 dias 
+con esto es capaz de predecir el seguiente valor 
+
+model = Sequential()
