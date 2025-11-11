@@ -159,7 +159,7 @@ def main():
 
     metodo_pred = st.sidebar.radio(
         "Método de predicción:",
-        ["LSTM (profundo)", "Gradiente (lineal)"]
+        ["LSTM (profundo)", "Sistema Gradiente"]
     )
 
     if len(rango_fechas) != 2 or rango_fechas[0] >= rango_fechas[1]:
@@ -212,9 +212,9 @@ def main():
             porcentaje_cambio = (diferencia / ultimo_precio) * 100
 
             if porcentaje_cambio > 0:
-                recomendacion = "💹 Considera invertir: se espera subida."
+                recomendacion = "Considera invertir: se espera subida."
             else:
-                recomendacion = "⚠️ Precaución: se espera bajada."
+                recomendacion = "Precaución: se espera bajada."
 
             st.write(f"**{symbol}:** Último = ${ultimo_precio:,.2f}, Predicción = ${prediccion:,.2f} ({porcentaje_cambio:.2f}%)")
             st.write(recomendacion)
