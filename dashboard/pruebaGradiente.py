@@ -57,6 +57,7 @@ def get_crypto_data():
 
     return pd.DataFrame(rows)
 
+#Inicio de la red neuronal 
 
 def entrenar_modelo(data, window=10):
     scaler = MinMaxScaler()
@@ -73,12 +74,14 @@ def entrenar_modelo(data, window=10):
     X, y = np.array(X), np.array(y)
     X = np.reshape(X, (X.shape[0], X.shape[1], 1))
 
+    #Aca define el modeeeelooo y los 10 dias pa que se entrene
+
     model = Sequential([
         LSTM(50, return_sequences=True, input_shape=(X.shape[1], 1)),
         LSTM(50),
         Dense(1)
     ])
-
+#Acá lo está entrenando y lo predice
     model.compile(optimizer='adam', loss='mean_squared_error')
     model.fit(X, y, epochs=10, batch_size=32, verbose=0)
 
