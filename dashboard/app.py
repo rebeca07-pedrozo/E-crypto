@@ -58,7 +58,7 @@ def get_crypto_data():
 
     df = pd.DataFrame(rows)
     return df
-
+#Entrenaimiento y predicción LSTM
 def entrenar_modelo(data, window=10):
     scaler = MinMaxScaler()
     scaled_data = scaler.fit_transform(data.reshape(-1, 1))
@@ -83,7 +83,7 @@ def entrenar_modelo(data, window=10):
     model.fit(X, y, epochs=10, batch_size=32, verbose=0)
     
     return model, scaler
-
+#Modelo de prediccion
 def predecir_precio(model, scaler, data, window=10):
     last_window = data[-window:]
     scaled_last_window = scaler.transform(last_window.reshape(-1, 1))

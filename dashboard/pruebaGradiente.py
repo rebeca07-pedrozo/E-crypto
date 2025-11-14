@@ -119,7 +119,7 @@ def descenso_gradiente(data, lr=0.0001, epochs=500):
 
 def main():
     st.set_page_config(page_title="Crypto OLAP Dashboard + Predicción LSTM / Gradiente", layout="wide")
-
+#Responsive   
     st.markdown(
         """
         <style>
