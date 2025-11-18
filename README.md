@@ -17,7 +17,7 @@ Plataforma cripto con API (FastAPI), scrapers en tiempo real, análisis OLAP y p
 
 initializer steps
 1. python -m venv env
-2. source env/Scripts/activate
+2. source env/Scripts/activate / source env/bin/activate
 3. pip install -r requirements.txt
 4. cd dashboard 
 5. python -m streamlit run app.py

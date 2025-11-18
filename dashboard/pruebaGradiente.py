@@ -57,6 +57,7 @@ def get_crypto_data():
 
     return pd.DataFrame(rows)
 
+#Inicio de la red neuronal 
 
 def entrenar_modelo(data, window=10):
     scaler = MinMaxScaler()
@@ -73,12 +74,14 @@ def entrenar_modelo(data, window=10):
     X, y = np.array(X), np.array(y)
     X = np.reshape(X, (X.shape[0], X.shape[1], 1))
 
+    #Aca define el modeeeelooo y los 10 dias pa que se entrene
+
     model = Sequential([
         LSTM(50, return_sequences=True, input_shape=(X.shape[1], 1)),
         LSTM(50),
         Dense(1)
     ])
-
+#Acá lo está entrenando y lo predice
     model.compile(optimizer='adam', loss='mean_squared_error')
     model.fit(X, y, epochs=10, batch_size=32, verbose=0)
 
@@ -159,7 +162,7 @@ def main():
 
     metodo_pred = st.sidebar.radio(
         "Método de predicción:",
-        ["LSTM (profundo)", "Gradiente (lineal)"]
+        ["LSTM (profundo)", "Sistema Gradiente"]
     )
 
     if len(rango_fechas) != 2 or rango_fechas[0] >= rango_fechas[1]:
@@ -212,9 +215,9 @@ def main():
             porcentaje_cambio = (diferencia / ultimo_precio) * 100
 
             if porcentaje_cambio > 0:
-                recomendacion = "💹 Considera invertir: se espera subida."
+                recomendacion = "Considera invertir: se espera subida."
             else:
-                recomendacion = "⚠️ Precaución: se espera bajada."
+                recomendacion = "Precaución: se espera bajada."
 
             st.write(f"**{symbol}:** Último = ${ultimo_precio:,.2f}, Predicción = ${prediccion:,.2f} ({porcentaje_cambio:.2f}%)")
             st.write(recomendacion)
