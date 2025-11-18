@@ -20,7 +20,7 @@ initializer steps
 2. source env/Scripts/activate / source env/bin/activate
 3. pip install -r requirements.txt
 4. cd dashboard 
-5. python -m streamlit run app.py
+5. python -m streamlit run comparacion.py
 ---
 
 ## Archivos para mantenimiento y actualización de datos
